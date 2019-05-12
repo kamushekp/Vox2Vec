@@ -1,0 +1,5 @@
+EXAMPLE:
+python keras_to_tensorflow.py 
+    --input_model="path/to/keras/model.h5" 
+    --input_model_json="path/to/keras/model.json" 
+    --output_model="path/to/save/model.pb"

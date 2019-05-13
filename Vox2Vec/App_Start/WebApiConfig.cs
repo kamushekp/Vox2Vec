@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.Design;
 using System.Web.Http;
-using Unity;
 using Vox2Vec.DistanceProviders;
 using Vox2Vec.Implementation;
 using Vox2Vec.Implementation.Python;

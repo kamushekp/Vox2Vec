@@ -3,10 +3,10 @@ using System.Web.Mvc;
 
 using Unity.AspNet.Mvc;
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Vox2Vec.UnityMvcActivator), nameof(Vox2Vec.UnityMvcActivator.Start))]
-[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(Vox2Vec.UnityMvcActivator), nameof(Vox2Vec.UnityMvcActivator.Shutdown))]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(WebApplication1.UnityMvcActivator), nameof(WebApplication1.UnityMvcActivator.Start))]
+[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(WebApplication1.UnityMvcActivator), nameof(WebApplication1.UnityMvcActivator.Shutdown))]
 
-namespace Vox2Vec
+namespace WebApplication1
 {
     /// <summary>
     /// Provides the bootstrapping for integrating Unity with ASP.NET MVC.

@@ -1,12 +1,8 @@
+using Main.Controllers;
 using System;
-
 using Unity;
-using Vox2Vec.DistanceProviders;
-using Vox2Vec.Implementation;
-using Vox2Vec.Implementation.Python;
-using Vox2Vec.Services;
 
-namespace Vox2Vec
+namespace Main
 {
     /// <summary>
     /// Specifies the Unity configuration for the main container.
@@ -42,19 +38,11 @@ namespace Vox2Vec
         {
             // NOTE: To load from web.config uncomment the line below.
             // Make sure to add a Unity.Configuration to the using statements.
-            // container.LoadConfiguration();
+            //container.LoadConfiguration();
 
-            // TODO: Register your type's mappings here.
-            // container.RegisterType<IProductRepository, ProductRepository>();
-
-
-            container.RegisterType<IEmbeddingExtractor, EmbeddingExtractor>();
-            container.RegisterType<IVoicePreprocessor, VoicePreprocessor>();
-            container.RegisterType<IVoicePathSource, VoicePathSource>();
-            container.RegisterType<IVoicePipeline, VoicePipeline>();
-            container.RegisterType<IFeatureRepository, InMemoryFeatureRepository>();
-            container.RegisterType<IDistanceProvider, CosineDistanceProvider>();
-
+            // TODO: Register your type's mappings here.var container = new UnityContainer();
+            container.RegisterSingleton<IInterrface1, IClass1>();
+            container.RegisterType<IInterrface1, IClass1>();
         }
     }
 }

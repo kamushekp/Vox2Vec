@@ -2,6 +2,8 @@
 using System.IO;
 using System.Web;
 using System.Web.Mvc;
+using Vox2Vec.Implementation;
+using Vox2Vec.Implementation.Python;
 using Vox2Vec.Models;
 using Vox2Vec.Services;
 
@@ -12,10 +14,10 @@ namespace Vox2Vec.Controllers
         private IVoicePipeline voicePipeline;
         private IFeatureRepository featureRepository;
 
-        public HomeController(IVoicePipeline voicePipeline, IFeatureRepository featureRepository)
+        public HomeController()
         {
-            this.voicePipeline = voicePipeline;
-            this.featureRepository = featureRepository;
+            this.voicePipeline = new VoicePipeline(new EmbeddingExtractor(), new VoicePreprocessor(), new VoicePathSource());
+            this.featureRepository = new InMemoryFeatureRepository();
         }
 
         public ActionResult DragFilesInvitation(UserInfo userInfo)

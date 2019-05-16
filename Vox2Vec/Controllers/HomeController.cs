@@ -33,7 +33,7 @@ namespace Vox2Vec.Controllers
         public ActionResult Authorize(string Name)
         {
             var s1 = Name; //
-            this.TempData["userInfo"] = new UserInfo {UserName = Name};
+            this.KeepUserInfo(new UserInfo {UserName = Name});
             return this.RedirectToAction("DragFilesInvitation");
         }
 
@@ -47,10 +47,20 @@ namespace Vox2Vec.Controllers
 
                 var path = this.SaveFile(file);
                 var embedding = this.voicePipeline.Extract(path);
-                //this.featureRepository.AddVoiceVecAsync(embedding)
-                
+                this.featureRepository.AddVoiceVecAsync(embedding, this.GetUserInfo());
+
             }
             throw new NotImplementedException();
+        }
+
+        private void KeepUserInfo(UserInfo userInfo)
+        {
+            this.TempData["userInfo"] = userInfo;
+        }
+
+        private UserInfo GetUserInfo()
+        {
+            return (UserInfo)this.TempData["userInfo"];
         }
 
         private string SaveFile(HttpPostedFileBase file)

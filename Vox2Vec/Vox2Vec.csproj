@@ -35,6 +35,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -264,7 +265,9 @@
     <Content Include="src\Implementation\Python\Python\LoadVoice.py" />
     <Content Include="src\Implementation\Python\Python\Preprocessing.py" />
     <Content Include="src\Implementation\Python\Python\sigproc.py" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -276,7 +279,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="src\Implementation\Python\base_model.h5" />
-    <Content Include="src\Implementation\Python\base_model.pb" />
+    <EmbeddedResource Include="src\Implementation\Python\base_model.pb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="Views\Home\AuthorizeInvitation.cshtml" />
     <Content Include="Views\Home\DragFilesInvitation.cshtml" />
   </ItemGroup>

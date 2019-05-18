@@ -16,12 +16,10 @@ namespace Vox2Vec.Implementation.Python
         private readonly TFSession.Runner runner;
         private readonly TFGraph tfGraph;
 
-        public EmbeddingExtractor()
+        public EmbeddingExtractor(IResourcePaths resourcePaths)
         {
             this.tfGraph = new TFGraph();
-            var pathToModel = Path.Combine(HostingEnvironment.ApplicationPhysicalPath, "bin", "src", "Implementation",
-                "Python", "base_model.pb");
-            var model = File.ReadAllBytes(pathToModel);
+            var model = File.ReadAllBytes(resourcePaths.ModelPath);
             this.tfGraph.Import(model);
             var session = new TFSession(this.tfGraph);
             this.runner = session.GetRunner();

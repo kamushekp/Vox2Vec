@@ -6,16 +6,22 @@ using Vox2Vec.Services;
 
 namespace Vox2Vec.Implementation.Python
 {
-    public class VoicePathSource : ClassWithPythonUsage, IVoicePathSource
+    public class VoicePathSource : IVoicePathSource
     {
-        public override string ScriptName => "LoadVoice.py";
+        private readonly IResourcePaths resourcePaths;
+
+        public VoicePathSource(IResourcePaths resourcePaths)
+        {
+            this.resourcePaths = resourcePaths;
+        }
+
 
         public Voice Get(string filename)
         {
-            var args = $"{AroundArg(this.ScriptPath)} {AroundArg(filename)}";
+            var args = $"{AroundArg(this.resourcePaths.LoadVoiceScriptPath)} {AroundArg(filename)}";
             var p = new Process
             {
-                StartInfo = new ProcessStartInfo(PythonPath, args)
+                StartInfo = new ProcessStartInfo(this.resourcePaths.PythonPath, args)
                 {
                     RedirectStandardOutput = true,
                     UseShellExecute = false,

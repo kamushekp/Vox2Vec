@@ -8,10 +8,14 @@ using Vox2Vec.Services;
 
 namespace Vox2Vec.Implementation.Python
 {
-    public class VoicePreprocessor:ClassWithPythonUsage, IVoicePreprocessor
+    public class VoicePreprocessor: IVoicePreprocessor
     {
+        private readonly IResourcePaths resourcePaths;
 
-        public override string ScriptName => "Preprocessing.py";
+        public VoicePreprocessor(IResourcePaths resourcePaths)
+        {
+            this.resourcePaths = resourcePaths;
+        }
 
         public Vox PreprocessVoice(Voice voice)
         {
@@ -19,10 +23,10 @@ namespace Vox2Vec.Implementation.Python
             var filepath = Path.Combine(Directory.GetCurrentDirectory(),"temp.txt");
             File.WriteAllText(filepath, stringedVoice);
 
-            var args = $"{AroundArg(this.ScriptPath)} {AroundArg(filepath)}";
+            var args = $"{AroundArg(this.resourcePaths.VoicePreprocessorPath)} {AroundArg(filepath)}";
             var p = new Process
             {
-                StartInfo = new ProcessStartInfo(PythonPath, args)
+                StartInfo = new ProcessStartInfo(this.resourcePaths.PythonPath, args)
                 {
                     RedirectStandardOutput = true,
                     UseShellExecute = false,

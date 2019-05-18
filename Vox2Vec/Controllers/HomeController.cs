@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using Vox2Vec.Implementation;
 using Vox2Vec.Implementation.Python;
@@ -16,7 +17,11 @@ namespace Vox2Vec.Controllers
 
         public HomeController()
         {
-            this.voicePipeline = new VoicePipeline(new EmbeddingExtractor(), new VoicePreprocessor(), new VoicePathSource());
+            var resoursePath = new ResourcePaths();
+            var extractor = new EmbeddingExtractor(resoursePath);
+            var voivePreprocessor = new VoicePreprocessor(resoursePath);
+            var voicePathSource = new VoicePathSource(resoursePath);
+            this.voicePipeline = new VoicePipeline(extractor, voivePreprocessor, voicePathSource);
             this.featureRepository = new InMemoryFeatureRepository();
         }
 
@@ -50,7 +55,6 @@ namespace Vox2Vec.Controllers
                 this.featureRepository.AddVoiceVecAsync(embedding, this.GetUserInfo());
 
             }
-            throw new NotImplementedException();
         }
 
         private void KeepUserInfo(UserInfo userInfo)

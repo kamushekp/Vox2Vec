@@ -27,14 +27,16 @@ namespace Vox2Vec.Implementation
             return Task.Delay(0);// ..CompletedTask;
         }
 
-        public Task<UserInfo[]> GetNearestNeighbors(Embedding vector, int count, IDistanceProvider distanceProvider)
+        public Task<NearestUser[]> GetNearestNeighbors(Embedding vector, int count, IDistanceProvider distanceProvider)
         {
             var result = this.storedValues
-                .Select(storedValue => new
-                    {name = storedValue.UserInfo, distance = distanceProvider.Measure(storedValue.Embedding, vector)})
-                .OrderBy(elem => elem.distance)
+                .Select(storedValue => new NearestUser()
+                {
+                    Name = storedValue.UserInfo.UserName,
+                    Distance = distanceProvider.Measure(storedValue.Embedding, vector)
+                })
+                .OrderBy(elem => elem.Distance)
                 .Take(count)
-                .Select(elem => elem.name)
                 .ToArray();
 
             return Task.FromResult(result); 

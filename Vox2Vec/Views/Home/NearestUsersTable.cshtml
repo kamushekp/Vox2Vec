@@ -1,0 +1,12 @@
+﻿@{
+    var grid = new WebGrid(Model, canSort: true, canPage: true, rowsPerPage: 5);
+}
+
+<!DOCTYPE html>
+
+<body>
+<h1> Nearest neighbors: </h1>
+<div>
+    @grid.GetHtml();
+</div>
+</body>

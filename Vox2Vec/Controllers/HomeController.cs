@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
+using Vox2Vec.DistanceProviders;
 using Vox2Vec.Implementation;
 using Vox2Vec.Implementation.Python;
 using Vox2Vec.Models;
@@ -35,9 +37,13 @@ namespace Vox2Vec.Controllers
             return this.View();
         }
 
+        public ActionResult NearestUsersTableAwaiting()
+        {
+            return this.View();
+        }
+
         public ActionResult Authorize(string Name)
         {
-            var s1 = Name; //
             this.KeepUserInfo(new UserInfo {UserName = Name});
             return this.RedirectToAction("DragFilesInvitation");
         }
@@ -53,8 +59,28 @@ namespace Vox2Vec.Controllers
                 var path = this.SaveFile(file);
                 var embedding = this.voicePipeline.Extract(path);
                 this.featureRepository.AddVoiceVecAsync(embedding, this.GetUserInfo());
-
+                var nearestUsers =
+                    this.featureRepository.GetNearestNeighbors(embedding, 5, new CosineDistanceProvider()).GetAwaiter().GetResult();
+                this.KeepNearestUsers(nearestUsers);
             }
+
+            return this.RedirectToAction("NearestUsersTable");
+        }
+
+        public ActionResult NearestUsersTable()
+        {
+            var nearestUsersList = this.GetNearestUsers();
+            return this.View(nearestUsersList);
+        }
+
+        private void KeepNearestUsers(NearestUser[] nearestUsers)
+        {
+            this.TempData["nearestUsers"] = nearestUsers;
+        }
+
+        private NearestUser[] GetNearestUsers()
+        {
+            return (NearestUser[])this.TempData["nearestUsers"];
         }
 
         private void KeepUserInfo(UserInfo userInfo)

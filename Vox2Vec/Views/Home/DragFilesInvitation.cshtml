@@ -1,20 +1,3 @@
 ﻿@using Vox2Vec.Helpers
-@{
-    ViewBag.Title = "Upload file with voice";
-}
 
 @Html.FileUploadForm("../Home/DragFilesProcessing")
-
-@section scripts{
-<script type="text/javascript">
-    Dropzone.options.dropzoneForm = {
-        init: function () {
-            var myDropzone = this;
-            this.on("complete", function (data) {
-                var res = JSON.parse(data.xhr.responseText);
-                console.log(res.Message);
-            });
-        }
-    };
-</script>
-}

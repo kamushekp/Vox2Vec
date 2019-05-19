@@ -14,17 +14,13 @@ namespace Vox2Vec.Controllers
 {
     public class HomeController : Controller
     {
-        private IVoicePipeline voicePipeline;
-        private IFeatureRepository featureRepository;
+        private readonly IVoicePipeline voicePipeline;
+        private readonly IFeatureRepository featureRepository;
 
-        public HomeController()
+        public HomeController(IVoicePipeline voicePipeline, IFeatureRepository featureRepository)
         {
-            var resoursePath = new ResourcePaths();
-            var extractor = new EmbeddingExtractor(resoursePath);
-            var voivePreprocessor = new VoicePreprocessor(resoursePath);
-            var voicePathSource = new VoicePathSource(resoursePath);
-            this.voicePipeline = new VoicePipeline(extractor, voivePreprocessor, voicePathSource);
-            this.featureRepository = new InMemoryFeatureRepository();
+            this.voicePipeline = voicePipeline;
+            this.featureRepository = featureRepository;
         }
 
         public ActionResult DragFilesInvitation(UserInfo userInfo)

@@ -11,7 +11,7 @@ namespace Vox2Vec.DistanceProviders
     {
         public double Measure(Embedding v1, Embedding v2)
         {
-            return 1f - GetCosineSimilarity(v1.Values, v2.Values);
+            return (1f - GetCosineSimilarity(v1.Values, v2.Values)) * 0.5f;
         }
         public static double GetCosineSimilarity(float[] v1, float[] v2)
         {

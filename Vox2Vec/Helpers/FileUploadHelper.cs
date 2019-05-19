@@ -10,6 +10,8 @@ namespace Vox2Vec.Helpers
             string formTemplate = @"<form action='{0}' method='post' enctype='multipart/form-data' class='dropzone'  id='dropzoneForm'>
                                         <div class='fallback'>
                                             <input name='file' type='file' multiple />
+                                            <br>
+                                            <br>
                                             <input type='submit' value='Upload' />
                                         </div>
                                     </form>";

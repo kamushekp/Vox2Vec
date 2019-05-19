@@ -34,7 +34,7 @@ namespace Vox2Vec.Implementation
         public Task AddVoiceVecAsync(Embedding embedding, UserInfo userInfo)
         {
             this.storedValues.Add(new StorageModel(){UserInfo = userInfo, Embedding = embedding});
-            Serialization.WriteToBinaryFile(this.resourcePaths.DataDumpFile, this.storedValues, true);
+            Serialization.WriteToBinaryFile(this.resourcePaths.DataDumpFile, this.storedValues, false);
             return Task.Delay(0);
         }
 

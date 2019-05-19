@@ -3,6 +3,26 @@
 
 @using (Html.BeginForm("Authorize", "Home", FormMethod.Post))
 {
-    <input type="text" name="Name" id="Name" />
-    <input type="submit" value="Name" />
+    <head>
+        <style>
+            .center {
+                margin: auto;
+                width: 60%;
+                border: 3px solid #73AD21;
+                padding: 10px;
+            }
+        </style>
+    </head>
+    <h2>Authorization invitation</h2>
+    <p>This is alpha version so we dont ask you to verify identity</p>
+
+    <div class="center">
+        <p><b>Note: </b>Please, dont use unique name for every piece of speech if you want to recognize yourself.</p>
+  
+        <input type="text" name="Name" id="Name"/>
+        <br>
+        <br>
+        <input type="submit" value="Its my nickname!"/>
+    </div>
+    
 }

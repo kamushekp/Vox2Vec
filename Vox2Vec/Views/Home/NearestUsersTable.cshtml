@@ -1,12 +1,53 @@
-﻿@{
-    var grid = new WebGrid(Model, canSort: true, canPage: true, rowsPerPage: 5);
-}
+﻿@model Vox2Vec.Models.NearestUser[]
 
 <!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .center {
+            margin: auto;
+            width: 60%;
+            border: 3px solid #73AD21;
+            padding: 10px;
+        }
+    </style>
 
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
 <body>
-<h1> Nearest neighbors: </h1>
-<div>
-    @grid.GetHtml();
-</div>
+
+<h2>Here is 5th people whos voice looks like yours!</h2>
+
+<table class="center">
+    
+    <tr>
+        <td>Nickname</td>
+        <td>Similarity</td>
+    </tr>
+
+    @foreach (var d in Model)
+    {
+        <tr>
+            <td>@d.Name</td>
+            <td>@d.Distance</td>
+        </tr>
+    }
+</table>
 </body>
+</html>

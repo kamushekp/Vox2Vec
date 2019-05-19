@@ -33,11 +33,6 @@ namespace Vox2Vec.Controllers
             return this.View();
         }
 
-        public ActionResult NearestUsersTableAwaiting()
-        {
-            return this.View();
-        }
-
         public ActionResult Authorize(string Name)
         {
             this.KeepUserInfo(new UserInfo {UserName = Name});

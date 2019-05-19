@@ -198,6 +198,7 @@
     <Compile Include="src\Implementation\Python\VoicePipeline.cs" />
     <Compile Include="src\Implementation\Python\VoicePreprocessor.cs" />
     <Compile Include="src\Implementation\ResourcePaths.cs" />
+    <Compile Include="src\Implementation\Serialization.cs" />
     <Compile Include="src\Models\Embedding.cs" />
     <Compile Include="src\Models\UserInfo.cs" />
     <Compile Include="src\Models\Voice.cs" />

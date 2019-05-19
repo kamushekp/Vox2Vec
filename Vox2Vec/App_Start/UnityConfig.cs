@@ -19,15 +19,14 @@ namespace Vox2Vec
             // it is NOT necessary to register your controllers
             
             // e.g. container.RegisterType<ITestService, TestService>();
-            container.RegisterType<IDistanceProvider, CosineDistanceProvider>();
-            container.RegisterType<IResourcePaths, ResourcePaths>();
+            container.RegisterSingleton<IDistanceProvider, CosineDistanceProvider>();
+            container.RegisterSingleton<IResourcePaths, ResourcePaths>();
             container.RegisterType<IEmbeddingExtractor, EmbeddingExtractor>();
-            container.RegisterType<IVoicePreprocessor, VoicePreprocessor>();
-            container.RegisterType<IVoicePathSource, VoicePathSource>();
+            container.RegisterSingleton<IVoicePreprocessor, VoicePreprocessor>();
+            container.RegisterSingleton<IVoicePathSource, VoicePathSource>();
             container.RegisterType<IVoicePipeline, VoicePipeline>();
             container.RegisterSingleton<IFeatureRepository, InMemoryFeatureRepository>();
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
-            //GlobalConfiguration.Configuration.DependencyResolver = new Unity.WebApi.UnityDependencyResolver(container);
         }
     }
 }

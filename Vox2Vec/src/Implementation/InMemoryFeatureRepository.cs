@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Vox2Vec.Models;
@@ -8,6 +9,9 @@ namespace Vox2Vec.Implementation
 {
     public class InMemoryFeatureRepository: IFeatureRepository
     {
+        private readonly IResourcePaths resourcePaths;
+
+        [Serializable]
         private class StorageModel
         {
             public UserInfo UserInfo { get; set; }
@@ -16,15 +20,22 @@ namespace Vox2Vec.Implementation
 
         private readonly List<StorageModel> storedValues;
 
-        public InMemoryFeatureRepository()
+        public InMemoryFeatureRepository(IResourcePaths resourcePaths)
         {
-            this.storedValues = new List<StorageModel>();
+            this.resourcePaths = resourcePaths;
+            this.storedValues = Serialization.ReadFromBinaryFile<List<StorageModel>>(resourcePaths.DataDumpFile);
+
+            if (this.storedValues == null)
+            {
+                this.storedValues = new List<StorageModel>();
+            }
         }
 
         public Task AddVoiceVecAsync(Embedding embedding, UserInfo userInfo)
         {
             this.storedValues.Add(new StorageModel(){UserInfo = userInfo, Embedding = embedding});
-            return Task.Delay(0);// ..CompletedTask;
+            Serialization.WriteToBinaryFile(this.resourcePaths.DataDumpFile, this.storedValues, true);
+            return Task.Delay(0);
         }
 
         public Task<NearestUser[]> GetNearestNeighbors(Embedding vector, int count, IDistanceProvider distanceProvider)

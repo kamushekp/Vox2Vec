@@ -1,5 +1,8 @@
-﻿namespace Vox2Vec.Models
+﻿using System;
+
+namespace Vox2Vec.Models
 {
+    [Serializable]
     public class UserInfo
     {
         private string userName;

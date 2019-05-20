@@ -2,5 +2,6 @@
 ##1. Specify you nickname
 ![nickname](/Readme/NearestUsersTable.jpg)
 ##2. Enter your voice
-![GitHub Logo](/Readme/NearestUsersTable.jpg)
+![GitHub Logo](/Readme/Authorization.jpg)
 ##3. Here are results
+![GitHub Logo](/Readme/Drag.jpg)
